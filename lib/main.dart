@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
+import 'mybooks.dart';
+import 'profile.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,9 +13,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return HomePage();
+    return MaterialApp( //use MaterialApp() widget like this
+
+        home: MyHomePage(title: 'OpenLibrar',),
+        theme: ThemeData(
+          primaryColor: const Color(0xff2F8D46),
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+        ),
+    );
   }
 }
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -34,68 +46,151 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int pageIndex = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+  final pages = [
+    Homepage(),
+    MyBooks(),
+    MyProfile(),
+    Page4(),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
+      backgroundColor: const Color(0xffC4DFCB),
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        leading: Icon(
+          Icons.menu,
+          color: Theme.of(context).primaryColor,
+        ),
+        title: Text(
+          "OpenLibrary",
+          style: TextStyle(
+            color: Theme.of(context).primaryColor,
+            fontSize: 25,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.white,
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+      body: pages[pageIndex],
+      bottomNavigationBar: buildMyNavBar(context),
+    );
+  }
+
+  Container buildMyNavBar(BuildContext context) {
+    return Container(
+      height: 60,
+      decoration: BoxDecoration(
+        color: Theme.of(context).primaryColor,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          IconButton(
+            enableFeedback: false,
+            onPressed: () {
+              setState(() {
+                pageIndex = 0;
+              });
+            },
+            icon: pageIndex == 0
+                ? const Icon(
+              Icons.home_filled,
+              color: Colors.white,
+              size: 35,
+            )
+                : const Icon(
+              Icons.home_outlined,
+              color: Colors.white,
+              size: 35,
+            ),
+          ),
+          IconButton(
+            enableFeedback: false,
+            onPressed: () {
+              setState(() {
+                pageIndex = 1;
+              });
+            },
+            icon: pageIndex == 1
+                ? const Icon(
+              Icons.work_rounded,
+              color: Colors.white,
+              size: 35,
+            )
+                : const Icon(
+              Icons.work_outline_outlined,
+              color: Colors.white,
+              size: 35,
+            ),
+          ),
+          IconButton(
+            enableFeedback: false,
+            onPressed: () {
+              setState(() {
+                pageIndex = 2;
+              });
+            },
+            icon: pageIndex == 2
+                ? const Icon(
+              Icons.widgets_rounded,
+              color: Colors.white,
+              size: 35,
+            )
+                : const Icon(
+              Icons.widgets_outlined,
+              color: Colors.white,
+              size: 35,
+            ),
+          ),
+          IconButton(
+            enableFeedback: false,
+            onPressed: () {
+              setState(() {
+                pageIndex = 3;
+              });
+            },
+            icon: pageIndex == 3
+                ? const Icon(
+              Icons.person,
+              color: Colors.white,
+              size: 35,
+            )
+                : const Icon(
+              Icons.person_outline,
+              color: Colors.white,
+              size: 35,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+class Page4 extends StatelessWidget {
+  const Page4({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: const Color(0xffC4DFCB),
+      child: Center(
+        child: Text(
+          "Page Number 4",
+          style: TextStyle(
+            color: Colors.green[900],
+            fontSize: 45,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ),
     );
   }
 }
