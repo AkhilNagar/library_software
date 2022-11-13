@@ -19,7 +19,16 @@ class Homepage extends StatelessWidget{
 
     return Scaffold(
       body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("images/background.jpg"),
+              fit: BoxFit.cover
+          ),
+        ),
         child:FloatingActionButton(
+            // largeSizeConstraints: BoxConstraints.tightFor(width:120, height:80),
             child: Text('Go to my books'),
             onPressed: (){
               Navigator.push(context, MaterialPageRoute(builder: (context) => MyBooks()));

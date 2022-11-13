@@ -8,6 +8,14 @@ class MyBooks extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('My Books')),
       body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("images/background.jpg"),
+              fit: BoxFit.cover
+          ),
+        ),
         child:
           FloatingActionButton(
               child: Text('Go to my profile'),

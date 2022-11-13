@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp( //use MaterialApp() widget like this
 
-        home: MyHomePage(title: 'OpenLibrar',),
+        home: MyHomePage(title: 'OpenLibrary',),
         theme: ThemeData(
           primaryColor: const Color(0xff2F8D46),
           splashColor: Colors.transparent,
@@ -28,7 +28,9 @@ class MyApp extends StatelessWidget {
 
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+
+  MyHomePage({super.key, required this.title});
+  Color color1 = HexColor("#A9A9A9");
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
