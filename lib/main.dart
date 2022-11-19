@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
 
   MyHomePage({super.key, required this.title});
-  Color color1 = HexColor("#A9A9A9");
+  //Color color1 = HexColor("#A9A9A9");
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
