@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'home.dart';
 import 'mybooks.dart';
 import 'profile.dart';
+import ''
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
 
         home: MyHomePage(title: 'OpenLibrary',),
         theme: ThemeData(
-          primaryColor: const Color(0xff2F8D46),
+          primaryColor: const Color(0xff967259),
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
           hoverColor: Colors.transparent,
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
 
   MyHomePage({super.key, required this.title});
-  Color color1 = HexColor("#A9A9A9");
+  // Color color1 = HexColor("#A9A9A9");
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -53,8 +54,8 @@ class _MyHomePageState extends State<MyHomePage> {
   final pages = [
     Homepage(),
     MyBooks(),
-    MyProfile(),
     Page4(),
+    MyProfile(),
   ];
 
   @override
