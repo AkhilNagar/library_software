@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'mybooks.dart';
 import 'profile.dart';
-import 'package:equatable/equatable.dart';
+// import 'package:equatable/equatable.dart';
 
 class MyApp extends StatelessWidget{
   @override
@@ -71,8 +71,8 @@ class SectionTitle extends StatelessWidget {
   }
 }
 
-abstract class Book extends Equatable {
-
-}
+// abstract class Book extends Equatable {
+//
+// }
 
 
