@@ -32,97 +32,100 @@ class MyProfile extends StatelessWidget{
     return Scaffold(
       appBar: AppBar(title: Text('Profile'), elevation:0),
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            CircleAvatar(
-              radius: 50,
-              backgroundImage: AssetImage("images/user.jpg"),
-            ),
-            Text(
-              'Akhil Nagar & Hetvi Gudka',
-              style: TextStyle(
-                fontSize: 40.0,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Pacifico',
+        child:SingleChildScrollView(
+
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              CircleAvatar(
+                radius: 50,
+                backgroundImage: AssetImage("images/user.jpg"),
               ),
-            ),
-            Text(
-              'Tech Enthusiasts',
-              style: TextStyle(
-                  fontSize: 30.0,
-                  color: Colors.blueGrey[200],
-                  letterSpacing: 2.5,
+              Text(
+                'Akhil Nagar & Hetvi Gudka',
+                style: TextStyle(
+                  fontSize: 40.0,
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
-                  fontFamily: 'Source Sans Pro'),
-            ),
-            SizedBox(
-              height: 20,
-              width: 200,
-              child: Divider(
-                color: Colors.white,
+                  fontFamily: 'Pacifico',
+                ),
               ),
-            ),
-            InfoCard(
-              text: phone,
-              icon: Icons.phone,
-              onPressed: () async {
-                // String removeSpaceFromPhoneNumber =
-                // phone.replaceAll(new RegExp(r"\s+\b|\b\s"), "");
-                // final phoneCall = 'tel:$removeSpaceFromPhoneNumber';
-                //
-                // if (await launcher.canLaunch(phoneCall)) {
-                //   await launcher.launch(phoneCall);
-                // } else {
-                //   _showDialog(
-                //     context,
-                //     title: 'Sorry',
-                //     msg: 'please try again ',
-                //   );
-                // }
-              },
-            ),
-            InfoCard(
-              text: email,
-              icon: Icons.email,
-              onPressed: () async {
-                // final emailAddress = 'mailto:$email';
-                // if (await launcher.canLaunch(emailAddress)) {
-                //   await launcher.launch(emailAddress);
-                // } else {
-                //   _showDialog(
-                //     context,
-                //     title: 'Sorry',
-                //     msg: 'please try again ',
-                //   );
-                // }
-              },
-            ),
-            InfoCard(
-              text: url,
-              icon: Icons.web,
-              onPressed: () async {
-                // if (await launcher.canLaunch(url)) {
-                //   await launcher.launch(url);
-                // } else {
-                //   _showDialog(
-                //     context,
-                //     title: 'Sorry',
-                //     msg: 'please try again ',
-                //   );
-                // }
-              },
-            ),
-            InfoCard(
-              text: location,
-              icon: Icons.location_city,
-              onPressed: () {
-                print('location');
-              },
-            ),
-          ],
-        ),
+              Text(
+                'Tech Enthusiasts',
+                style: TextStyle(
+                    fontSize: 30.0,
+                    color: Colors.blueGrey[200],
+                    letterSpacing: 2.5,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Source Sans Pro'),
+              ),
+              SizedBox(
+                height: 20,
+                width: 200,
+                child: Divider(
+                  color: Colors.white,
+                ),
+              ),
+              InfoCard(
+                text: phone,
+                icon: Icons.phone,
+                onPressed: () async {
+                  // String removeSpaceFromPhoneNumber =
+                  // phone.replaceAll(new RegExp(r"\s+\b|\b\s"), "");
+                  // final phoneCall = 'tel:$removeSpaceFromPhoneNumber';
+                  //
+                  // if (await launcher.canLaunch(phoneCall)) {
+                  //   await launcher.launch(phoneCall);
+                  // } else {
+                  //   _showDialog(
+                  //     context,
+                  //     title: 'Sorry',
+                  //     msg: 'please try again ',
+                  //   );
+                  // }
+                },
+              ),
+              InfoCard(
+                text: email,
+                icon: Icons.email,
+                onPressed: () async {
+                  // final emailAddress = 'mailto:$email';
+                  // if (await launcher.canLaunch(emailAddress)) {
+                  //   await launcher.launch(emailAddress);
+                  // } else {
+                  //   _showDialog(
+                  //     context,
+                  //     title: 'Sorry',
+                  //     msg: 'please try again ',
+                  //   );
+                  // }
+                },
+              ),
+              InfoCard(
+                text: url,
+                icon: Icons.web,
+                onPressed: () async {
+                  // if (await launcher.canLaunch(url)) {
+                  //   await launcher.launch(url);
+                  // } else {
+                  //   _showDialog(
+                  //     context,
+                  //     title: 'Sorry',
+                  //     msg: 'please try again ',
+                  //   );
+                  // }
+                },
+              ),
+              InfoCard(
+                text: location,
+                icon: Icons.location_city,
+                onPressed: () {
+                  print('location');
+                },
+              ),
+            ],
+          ),
+      ),
       ),
     );
   }
