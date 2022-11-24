@@ -30,7 +30,7 @@ class MyProfile extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(title: Text('Profile'), elevation:0),
+      appBar: AppBar(title: Text('Profile'), backgroundColor: Color(0xff885566),elevation:0),
       body: SafeArea(
         child:SingleChildScrollView(
 
@@ -42,7 +42,7 @@ class MyProfile extends StatelessWidget{
                 backgroundImage: AssetImage("images/user.jpg"),
               ),
               Text(
-                'Akhil Nagar & Hetvi Gudka',
+                'USER 19',
                 style: TextStyle(
                   fontSize: 40.0,
                   color: Colors.black,
@@ -121,6 +121,13 @@ class MyProfile extends StatelessWidget{
                 icon: Icons.location_city,
                 onPressed: () {
                   print('location');
+                },
+              ),
+              InfoCard(
+                text: "No. Of Books Read: 8",
+                icon: Icons.menu_book_sharp,
+                onPressed: () {
+                  print('No. Of Books Read');
                 },
               ),
             ],

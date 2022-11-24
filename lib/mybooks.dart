@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'CustomTextStyle.dart';
 import 'CustomUtils.dart';
+import 'constants.dart';
 
 import 'profile.dart';
 
@@ -10,204 +11,264 @@ class MyBooks extends StatefulWidget{
 }
 
 class _BookState extends State<MyBooks> {
+  final CategoriesScroller categoriesScroller = CategoriesScroller();
+  ScrollController controller = ScrollController();
+  bool closeTopContainer = false;
+  double topContainer = 0;
+
+  List<Widget> itemsData = [];
+
+  void getPostsData() {
+    List<dynamic> responseList = FOOD_DATA;
+    List<Widget> listItems = [];
+    responseList.forEach((post) {
+      listItems.add(Container(
+          height: 150,
+          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(20.0)), color: Colors.white, boxShadow: [
+            BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
+          ]),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      post["Name"],
+                      style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      post["Author"],
+                      style: const TextStyle(fontSize: 17, color: Colors.grey),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "\$ ${post["Rating"]}",
+                      style: const TextStyle(fontSize: 25, color: Colors.black, fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
+                Image.asset(
+                  "assets/images/${post["image"]}",
+                  height: double.infinity,
+                )
+              ],
+            ),
+          )));
+    });
+    setState(() {
+      itemsData = listItems;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getPostsData();
+    controller.addListener(() {
+
+      double value = controller.offset/119;
+
+      setState(() {
+        topContainer = value;
+        closeTopContainer = controller.offset > 50;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.grey.shade100,
-      body: Builder(
-        builder: (context) {
-          return ListView(
-            children: <Widget>[createHeader(), createSubTitle(), createCartList(), footer(context)],
-          );
-        },
-      ),
-    );
-  }
-
-  footer(BuildContext context) {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    final Size size = MediaQuery.of(context).size;
+    final double categoryHeight = size.height*0.30;
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        // appBar: AppBar(
+        //   elevation: 0,
+        //   backgroundColor: Colors.white,
+        //   leading: Icon(
+        //     Icons.menu,
+        //     color: Colors.black,
+        //   ),
+        //   actions: <Widget>[
+        //     IconButton(
+        //       icon: Icon(Icons.search, color: Colors.black),
+        //       onPressed: () {},
+        //     ),
+        //     IconButton(
+        //       icon: Icon(Icons.person, color: Colors.black),
+        //       onPressed: () {},
+        //     )
+        //   ],
+        // ),
+        body: Container(
+          //height: size.height,
+          child: Column(
             children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(left: 30),
-                child: Text(
-                  "Total",
-                  style: CustomTextStyle.textFormFieldMedium.copyWith(color: Colors.grey, fontSize: 12),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                // children: <Widget>[
+                //   Text(
+                //     "Loyality Cards",
+                //     style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 20),
+                //   ),
+                //   Text(
+                //     "Menu",
+                //     style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
+                //   ),
+                // ],
               ),
-              Container(
-                margin: EdgeInsets.only(right: 30),
-                child: Text(
-                  "\$299.00",
-                  style: CustomTextStyle.textFormFieldBlack.copyWith(color: Colors.greenAccent.shade700, fontSize: 14),
-                ),
+              const SizedBox(
+                height: 0,
               ),
-            ],
-          ),
-          Utils.getSizedBox(height: 8),
-          //ElevatedButton(onPressed: onPressed, child: child)
-          ElevatedButton(
-            child: Text(
-              "Checkout",
-              style: CustomTextStyle.textFormFieldSemiBold.copyWith(color: Colors.white),
-            ),
-            style: ElevatedButton.styleFrom(
-              primary: Colors.green,
-              padding: EdgeInsets.only(top: 12, left: 60, right: 60, bottom: 12),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(24))),
-            ),
-            onPressed: () {
-              Navigator.push(context, new MaterialPageRoute(builder: (context) => MyProfile()));
-            },
-
-
-          ),
-          Utils.getSizedBox(height: 8),
-        ],
-      ),
-      margin: EdgeInsets.only(top: 16),
-    );
-  }
-
-  createHeader() {
-    return Container(
-      alignment: Alignment.topLeft,
-      child: Text(
-        "SHOPPING CART",
-        style: CustomTextStyle.textFormFieldBold.copyWith(fontSize: 16, color: Colors.black),
-      ),
-      margin: EdgeInsets.only(left: 12, top: 12),
-    );
-  }
-
-  createSubTitle() {
-    return Container(
-      alignment: Alignment.topLeft,
-      child: Text(
-        "Total(3) Items",
-        style: CustomTextStyle.textFormFieldBold.copyWith(fontSize: 12, color: Colors.grey),
-      ),
-      margin: EdgeInsets.only(left: 12, top: 4),
-    );
-  }
-
-  createCartList() {
-    return ListView.builder(
-      shrinkWrap: true,
-      primary: false,
-      itemBuilder: (context, position) {
-        return createCartListItem();
-      },
-      itemCount: 5,
-    );
-  }
-
-  createCartListItem() {
-    return Stack(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.only(left: 16, right: 16, top: 16),
-          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(16))),
-          child: Row(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(right: 8, left: 8, top: 8, bottom: 8),
-                width: 80,
-                height: 80,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(14)),
-                    color: Colors.blue.shade200,
-                    image: DecorationImage(image: AssetImage("images/shoes_1.png"))),
+              AnimatedOpacity(
+                duration: const Duration(milliseconds: 200),
+                opacity: closeTopContainer?0:1,
+                child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    width: size.width,
+                    alignment: Alignment.topCenter,
+                    height: closeTopContainer?0:categoryHeight,
+                    child: categoriesScroller),
               ),
               Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.only(right: 8, top: 4),
-                        child: Text(
-                          "NIKE XTM Basketball Shoeas",
-                          maxLines: 2,
-                          softWrap: true,
-                          style: CustomTextStyle.textFormFieldSemiBold.copyWith(fontSize: 14),
-                        ),
-                      ),
-                      Utils.getSizedBox(height: 6),
-                      Text(
-                        "Green M",
-                        style: CustomTextStyle.textFormFieldRegular.copyWith(color: Colors.grey, fontSize: 14),
-                      ),
-                      Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              "\$299.00",
-                              style: CustomTextStyle.textFormFieldBlack.copyWith(color: Colors.green),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.remove,
-                                    size: 24,
-                                    color: Colors.grey.shade700,
-                                  ),
-                                  Container(
-                                    color: Colors.grey.shade200,
-                                    padding: const EdgeInsets.only(bottom: 2, right: 12, left: 12),
-                                    child: Text(
-                                      "1",
-                                      style: CustomTextStyle.textFormFieldSemiBold,
-                                    ),
-                                  ),
-                                  Icon(
-                                    Icons.add,
-                                    size: 24,
-                                    color: Colors.grey.shade700,
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                flex: 100,
-              )
+                  child: ListView.builder(
+                      controller: controller,
+                      itemCount: itemsData.length,
+                      physics: BouncingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        double scale = 1.0;
+                        if (topContainer > 0.5) {
+                          scale = index + 0.5 - topContainer;
+                          if (scale < 0) {
+                            scale = 0;
+                          } else if (scale > 1) {
+                            scale = 1;
+                          }
+                        }
+                        return Opacity(
+                          opacity: scale,
+                          child: Transform(
+                            transform:  Matrix4.identity()..scale(scale,scale),
+                            alignment: Alignment.bottomCenter,
+                            child: Align(
+                                heightFactor: 0.7,
+                                alignment: Alignment.topCenter,
+                                child: itemsData[index]),
+                          ),
+                        );
+                      })),
             ],
           ),
         ),
-        Align(
-          alignment: Alignment.topRight,
-          child: Container(
-            width: 24,
-            height: 24,
-            alignment: Alignment.center,
-            margin: EdgeInsets.only(right: 10, top: 8),
-            child: Icon(
-              Icons.close,
-              color: Colors.white,
-              size: 20,
-            ),
-            decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(4)), color: Colors.green),
+      ),
+    );
+  }
+}
+
+class CategoriesScroller extends StatelessWidget {
+  const CategoriesScroller();
+
+  @override
+  Widget build(BuildContext context) {
+    final double categoryHeight = 0;
+        //MediaQuery.of(context).size.height * 0.30 - 50;
+    return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      scrollDirection: Axis.horizontal,
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        child: FittedBox(
+          fit: BoxFit.fill,
+          alignment: Alignment.topCenter,
+          child: Row(
+            children: <Widget>[
+              // Container(
+              //   width: 150,
+              //   margin: EdgeInsets.only(right: 20),
+              //   height: categoryHeight,
+              //   decoration: BoxDecoration(color: Colors.orange.shade400, borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(12.0),
+              //     child: Column(
+              //       crossAxisAlignment: CrossAxisAlignment.start,
+              //       children: <Widget>[
+              //         Text(
+              //           "Most\nFavorites",
+              //           style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+              //         ),
+              //         SizedBox(
+              //           height: 10,
+              //         ),
+              //         Text(
+              //           "20 Items",
+              //           style: TextStyle(fontSize: 16, color: Colors.white),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+              // Container(
+              //   width: 150,
+              //   margin: EdgeInsets.only(right: 20),
+              //   height: categoryHeight,
+              //   decoration: BoxDecoration(color: Colors.blue.shade400, borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              //   child: Container(
+              //     child: Padding(
+              //       padding: const EdgeInsets.all(12.0),
+              //       child: Column(
+              //         crossAxisAlignment: CrossAxisAlignment.start,
+              //         children: <Widget>[
+              //           Text(
+              //             "Newest",
+              //             style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+              //           ),
+              //           SizedBox(
+              //             height: 10,
+              //           ),
+              //           Text(
+              //             "20 Items",
+              //             style: TextStyle(fontSize: 16, color: Colors.white),
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // Container(
+              //   width: 150,
+              //   margin: EdgeInsets.only(right: 20),
+              //   height: categoryHeight,
+              //   decoration: BoxDecoration(color: Colors.lightBlueAccent.shade400, borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(12.0),
+              //     child: Column(
+              //       crossAxisAlignment: CrossAxisAlignment.start,
+              //       children: <Widget>[
+              //         Text(
+              //           "Super\nSaving",
+              //           style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+              //         ),
+              //         SizedBox(
+              //           height: 10,
+              //         ),
+              //         Text(
+              //           "20 Items",
+              //           style: TextStyle(fontSize: 16, color: Colors.white),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+            ],
           ),
-        )
-      ],
+        ),
+      ),
     );
   }
 }

@@ -31,10 +31,9 @@ class _DonateState extends State<DonateBooks> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Donation Form")),
+        appBar: AppBar(title: Text("Donate Book!"),backgroundColor: Color(0xff885566),),
         body: Stack(
           children:<Widget>[
-
             Form(
               key: _formkey,
               child: ListView(
@@ -44,10 +43,10 @@ class _DonateState extends State<DonateBooks> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.name,
                       onChanged: (value) => name = value,
                       decoration: InputDecoration(
-                        labelText: "Enter Your Full Name...",
+                        labelText: "Enter Your Name",
                         icon: Icon(Icons.person),
                       ),
                     ),
@@ -57,34 +56,34 @@ class _DonateState extends State<DonateBooks> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.text,
                       onChanged: (value) => fname = value,
                       decoration: InputDecoration(
-                        labelText: "Enter Your Father's Name...",
-                        icon: Icon(Icons.person),
+                        labelText: "Enter the name of the book",
+                        icon: Icon(Icons.book),
                       ),
                     ),
                   ),
 
-                  Padding(padding: const EdgeInsets.only(top: 10)),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      keyboardType: TextInputType.emailAddress,
-                      onChanged: (value) => mname = value,
-                      decoration: InputDecoration(
-                        labelText: "Enter Your Mother's Name...",
-                        icon: Icon(Icons.person),
-                      ),
-                    ),
-                  ),
+                  // Padding(padding: const EdgeInsets.only(top: 10)),
+                  // Padding(
+                  //   padding: const EdgeInsets.all(8.0),
+                  //   child: TextField(
+                  //     keyboardType: TextInputType.emailAddress,
+                  //     onChanged: (value) => mname = value,
+                  //     decoration: InputDecoration(
+                  //       labelText: "Enter Your Mother's Name...",
+                  //       icon: Icon(Icons.person),
+                  //     ),
+                  //   ),
+                  // ),
 
                   Row(children: <Widget>[
                     Expanded(
                       child: ListTile(
                         title: Text(
                           "Male",
-                          textAlign: TextAlign.end,
+                          textAlign: TextAlign.start,
                         ),
                         trailing: Radio(
                             value: "male",
@@ -96,7 +95,7 @@ class _DonateState extends State<DonateBooks> {
                       child: ListTile(
                         title: Text(
                           "Female",
-                          textAlign: TextAlign.end,
+                          textAlign: TextAlign.start,
                         ),
                         trailing: Radio(
                             value: "female",
@@ -127,56 +126,60 @@ class _DonateState extends State<DonateBooks> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      autocorrect: false,
-                      obscureText: _obscureText,
-                      onChanged: (value) => password = value,
-                      decoration: InputDecoration(
-                        labelText: "Create Password...",
-                        icon: Icon(Icons.lock),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            // Based on passwordVisible state choose the icon
-                            _obscureText ? Icons.visibility : Icons.visibility_off,
-                            color: Theme.of(context).primaryColorLight,
-                          ),
-                          onPressed: () {
-                            // Update the state i.e. toogle the state of passwordVisible variable
-                            setState(() {
-                              _obscureText = !_obscureText;
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      autocorrect: false,
-                      obscureText: _obscureText,
-                      onChanged: (value) => password = value,
-                      decoration: InputDecoration(
-                        labelText: "Confirm Password...",
-                        icon: Icon(Icons.lock),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            // Based on passwordVisible state choose the icon
-                            _obscureText ? Icons.visibility : Icons.visibility_off,
-                            color: Theme.of(context).primaryColorLight,
-                          ),
-                          onPressed: () {
-                            // Update the state i.e. toogle the state of passwordVisible variable
-                            setState(() {
-                              _obscureText = !_obscureText;
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                  ),
+
+
+
+
+                  // Padding(
+                  //   padding: const EdgeInsets.all(8.0),
+                  //   child: TextFormField(
+                  //     autocorrect: false,
+                  //     obscureText: _obscureText,
+                  //     onChanged: (value) => password = value,
+                  //     decoration: InputDecoration(
+                  //       labelText: "Create Password...",
+                  //       icon: Icon(Icons.lock),
+                  //       suffixIcon: IconButton(
+                  //         icon: Icon(
+                  //           // Based on passwordVisible state choose the icon
+                  //           _obscureText ? Icons.visibility : Icons.visibility_off,
+                  //           color: Theme.of(context).primaryColorLight,
+                  //         ),
+                  //         onPressed: () {
+                  //           // Update the state i.e. toogle the state of passwordVisible variable
+                  //           setState(() {
+                  //             _obscureText = !_obscureText;
+                  //           });
+                  //         },
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // Padding(
+                  //   padding: const EdgeInsets.all(8.0),
+                  //   child: TextFormField(
+                  //     autocorrect: false,
+                  //     obscureText: _obscureText,
+                  //     onChanged: (value) => password = value,
+                  //     decoration: InputDecoration(
+                  //       labelText: "Confirm Password...",
+                  //       icon: Icon(Icons.lock),
+                  //       suffixIcon: IconButton(
+                  //         icon: Icon(
+                  //           // Based on passwordVisible state choose the icon
+                  //           _obscureText ? Icons.visibility : Icons.visibility_off,
+                  //           color: Theme.of(context).primaryColorLight,
+                  //         ),
+                  //         onPressed: () {
+                  //           // Update the state i.e. toogle the state of passwordVisible variable
+                  //           setState(() {
+                  //             _obscureText = !_obscureText;
+                  //           });
+                  //         },
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   Button(
                     text: 'Donate',
                     //callback: null,
@@ -199,14 +202,14 @@ class Button extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(8.0),
       child: Material(
-        color: Colors.blue,
+        color: Colors.brown,
         elevation: 6.0,
         borderRadius: BorderRadius.circular(30.0),
         child: MaterialButton(
           //onPressed: callback,
           minWidth: 200.0,
           height: 45.0,
-          onPressed: () {  },
+          onPressed: () {  },    //ADD BUTTON FUNCTION HERE
           child: Text(text, style: TextStyle(color: Colors.white)),
         ),
       ),
