@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "752966859636",
+    "project_id": "openlibrary-119ee",
+    "storage_bucket": "openlibrary-119ee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752966859636:android:f8e04fadc68e7ffe8f0a21",
+        "android_client_info": {
+          "package_name": "com.example.library_software"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "752966859636-posod8h8k016rbfvdo1a7pjgari9stfl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZiUUpJFKRG-AOIT1zC6KaNxjQj3Shd6M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "752966859636-posod8h8k016rbfvdo1a7pjgari9stfl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
