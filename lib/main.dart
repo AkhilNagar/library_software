@@ -3,6 +3,7 @@ import 'home.dart';
 import 'mybooks.dart';
 import 'profile.dart';
 import 'donatebook.dart';
+import 'bookstore.dart';
 
 void main() {
   runApp(const MyApp());
@@ -52,7 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
   int pageIndex = 0;
 
   final pages = [
-    Homepage(),
+    Bookstore(),
+    // Homepage(),
     MyBooks(),
     DonateBooks(),
     MyProfile(),
