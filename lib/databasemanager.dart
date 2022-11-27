@@ -6,7 +6,8 @@ class Database {
   static String? title;
   static String? description;
   static String? author;
-  static String? image;
+  static String? bookimage;
+  static String? authorimage;
   static int? score;
 
 }
@@ -16,18 +17,21 @@ class DatabaseManager {
     required String title,
     required String description,
     required String author,
-    required String image,
+    required String authorimage,
+    required String bookimage,
     required int score,
 
   }) async {
     DocumentReference documentReferencer =
-    donatedList.doc(title).collection('items').doc();
+    donatedList.doc();
+    //.doc(title).collection('donatedBooks').
 
     Map<String, dynamic> data = <String, dynamic>{
       "title": title,
       "description": description,
       "author":author,
-      "image":image,
+      "authorimage":authorimage,
+      "bookimage":bookimage,
       "score":score,
     };
 
