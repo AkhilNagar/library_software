@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
-import 'profile.dart';
+import 'databasemanager.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+String name="",author="";
+int score=0;
+String description="";
+String bookimage="";
+String authorimage="";
 
 class DonateBooks extends StatefulWidget {
   @override
@@ -7,29 +15,28 @@ class DonateBooks extends StatefulWidget {
 }
 
 class _DonateState extends State<DonateBooks> {
-  String email="";
-  String password="";
-  String name="",fname="",mname="";
-  String number="";
+
+
   bool _obscureText = true;
-  String gender="";
+
   String groupValue="male";
   final _formkey=GlobalKey<FormState>();
 
-  valueChanged(e){
-    setState(() {
-      if(e=="male"){
-        groupValue=e;
-        gender=e;
-      }
-      else if(e=="female"){
-        groupValue=e;
-        gender=e;
-      }
-    });
-  }
+  // valueChanged(e){
+  //   setState(() {
+  //     if(e=="male"){
+  //       groupValue=e;
+  //       gender=e;
+  //     }
+  //     else if(e=="female"){
+  //       groupValue=e;
+  //       gender=e;
+  //     }
+  //   });
+  // }
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         appBar: AppBar(title: Text("Donate Book!"),backgroundColor: Color(0xff885566),),
         body: Stack(
@@ -46,8 +53,8 @@ class _DonateState extends State<DonateBooks> {
                       keyboardType: TextInputType.name,
                       onChanged: (value) => name = value,
                       decoration: InputDecoration(
-                        labelText: "Enter Your Name",
-                        icon: Icon(Icons.person),
+                        labelText: "Book Name",
+                        icon: Icon(Icons.book),
                       ),
                     ),
                   ),
@@ -57,10 +64,10 @@ class _DonateState extends State<DonateBooks> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
                       keyboardType: TextInputType.text,
-                      onChanged: (value) => fname = value,
+                      onChanged: (value) => author = value,
                       decoration: InputDecoration(
-                        labelText: "Enter the name of the book",
-                        icon: Icon(Icons.book),
+                        labelText: "Author",
+                        icon: Icon(Icons.person),
                       ),
                     ),
                   ),
@@ -78,40 +85,42 @@ class _DonateState extends State<DonateBooks> {
                   //   ),
                   // ),
 
-                  Row(children: <Widget>[
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Male",
-                          textAlign: TextAlign.start,
-                        ),
-                        trailing: Radio(
-                            value: "male",
-                            groupValue: groupValue,
-                            onChanged: (e) => valueChanged(e)),
-                      ),
-                    ),
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Female",
-                          textAlign: TextAlign.start,
-                        ),
-                        trailing: Radio(
-                            value: "female",
-                            groupValue: groupValue,
-                            onChanged: (e) => valueChanged(e)),
-                      ),
-                    ),
-                  ]),
+
+                  // Row(children: <Widget>[
+                  //   Expanded(
+                  //     child: ListTile(
+                  //       title: Text(
+                  //         "Male",
+                  //         textAlign: TextAlign.start,
+                  //       ),
+                  //       trailing: Radio(
+                  //           value: "male",
+                  //           groupValue: groupValue,
+                  //           onChanged: (e) => valueChanged(e)),
+                  //     ),
+                  //   ),
+                  //   Expanded(
+                  //     child: ListTile(
+                  //       title: Text(
+                  //         "Female",
+                  //         textAlign: TextAlign.start,
+                  //       ),
+                  //       trailing: Radio(
+                  //           value: "female",
+                  //           groupValue: groupValue,
+                  //           onChanged: (e) => valueChanged(e)),
+                  //     ),
+                  //   ),
+                  // ]),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
-                      keyboardType: TextInputType.emailAddress,
-                      onChanged: (value) => email = value,
+                      maxLines: 10,
+                      keyboardType: TextInputType.text,
+                      onChanged: (value) => description = value,
                       decoration: InputDecoration(
-                        labelText: "Enter Your Email...",
-                        icon: Icon(Icons.email),
+                        labelText: "Description",
+                        icon: Icon(Icons.description),
                       ),
                     ),
                   ),
@@ -119,10 +128,35 @@ class _DonateState extends State<DonateBooks> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
                       keyboardType: TextInputType.number,
-                      onChanged: (value) => number = value,
+                      onChanged: (value) => score = int.parse(value),
                       decoration: InputDecoration(
-                        labelText: "Enter Your Mobile number...",
-                        icon: Icon(Icons.call),
+                        labelText: "Book rating",
+                        icon: Icon(Icons.grade),
+                      ),
+                    ),
+                  ),
+
+                  Padding(padding: const EdgeInsets.only(top: 10)),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      keyboardType: TextInputType.text,
+                      onChanged: (value) => bookimage = value,
+                      decoration: InputDecoration(
+                        labelText: "URL of Book Image",
+                        icon: Icon(Icons.book),
+                      ),
+                    ),
+                  ),
+                  Padding(padding: const EdgeInsets.only(top: 10)),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      keyboardType: TextInputType.text,
+                      onChanged: (value) => authorimage = value,
+                      decoration: InputDecoration(
+                        labelText: "URL of Author Image",
+                        icon: Icon(Icons.person),
                       ),
                     ),
                   ),
@@ -195,6 +229,7 @@ class _DonateState extends State<DonateBooks> {
 class Button extends StatelessWidget {
   //final VoidCallback callback;
   final String text;
+
   //required this.callback,
   const Button({Key? key, required this.text}) : super(key: key);
   @override
@@ -209,7 +244,24 @@ class Button extends StatelessWidget {
           //onPressed: callback,
           minWidth: 200.0,
           height: 45.0,
-          onPressed: () {  },    //ADD BUTTON FUNCTION HERE
+
+          onPressed: () {
+            DatabaseManager.addItem(title: name,
+                  description: description,
+                  author: author,
+                  authorimage:authorimage,
+                  bookimage:bookimage,
+                  score: score);
+
+            // FirebaseFirestore.instance
+            //     .collection('donatedBooks')
+            //     .add({"title": "title",
+            //   "description": "description",
+            //   "author":"author",
+            //   "image":"image",
+            //   "score":5});
+          },    //ADD BUTTON FUNCTION HERE
+
           child: Text(text, style: TextStyle(color: Colors.white)),
         ),
       ),
