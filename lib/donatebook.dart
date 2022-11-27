@@ -85,6 +85,7 @@ class _DonateState extends State<DonateBooks> {
                   //   ),
                   // ),
 
+
                   // Row(children: <Widget>[
                   //   Expanded(
                   //     child: ListTile(
@@ -134,6 +135,7 @@ class _DonateState extends State<DonateBooks> {
                       ),
                     ),
                   ),
+
                   Padding(padding: const EdgeInsets.only(top: 10)),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -158,6 +160,7 @@ class _DonateState extends State<DonateBooks> {
                       ),
                     ),
                   ),
+
 
 
 
@@ -241,6 +244,7 @@ class Button extends StatelessWidget {
           //onPressed: callback,
           minWidth: 200.0,
           height: 45.0,
+
           onPressed: () {
             DatabaseManager.addItem(title: name,
                   description: description,
@@ -257,6 +261,7 @@ class Button extends StatelessWidget {
             //   "image":"image",
             //   "score":5});
           },    //ADD BUTTON FUNCTION HERE
+
           child: Text(text, style: TextStyle(color: Colors.white)),
         ),
       ),
