@@ -16,14 +16,31 @@ class _BookstoreState extends State<Bookstore> {
 
   List<NavigationItem> navigationItems = getNavigationItemList();
   late NavigationItem selectedItem;
+  late List books=[];
+  void getBookList1() async {
+    print("start");
+  Future<List> _futureOfList = getBookList();
+  books = await _futureOfList ;
+  print("func");
+  print(books);
+  }
 
-  List<Book> books = getBookList();
-  List<Author> authors = getAuthorList();
+
+  late List authors=[];
+  void getAuthorList1() async {
+    print("startttttt");
+    Future<List> _futureOfList1 = getAuthorList();
+    authors = await _futureOfList1 ;
+    print("funccccccc");
+    print(authors);
+  }
 
   @override
   void initState() {
     super.initState();
     setState(() {
+      getBookList1();
+      getAuthorList1();
       selectedFilter = filters[0];
       selectedItem = navigationItems[0];
     });
@@ -271,7 +288,7 @@ class _BookstoreState extends State<Bookstore> {
                 child: Hero(
                   tag: book.title,
                   child: Image.asset(
-                    book.image,
+                    book.bookimage,
                     fit: BoxFit.fitWidth,
                   ),
                 ),
@@ -287,7 +304,7 @@ class _BookstoreState extends State<Bookstore> {
             ),
 
             Text(
-              book.author.fullname,
+              book.author,
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.grey,
@@ -338,7 +355,7 @@ class _BookstoreState extends State<Bookstore> {
               height: 75,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(author.image),
+                  image: AssetImage(author.authorimage),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -355,7 +372,7 @@ class _BookstoreState extends State<Bookstore> {
             children: [
 
               Text(
-                author.fullname,
+                author.author,
                 style: GoogleFonts.catamaran(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -375,14 +392,8 @@ class _BookstoreState extends State<Bookstore> {
                     width: 8,
                   ),
 
-                  Text(
-                    author.books.toString() + " books",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+
+
 
                 ],
               ),
