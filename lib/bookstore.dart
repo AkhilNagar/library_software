@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'data.dart';
 import 'constants.dart';
 import 'book_detail.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class Bookstore extends StatefulWidget {
   @override
@@ -285,15 +286,26 @@ class _BookstoreState extends State<Bookstore> {
                   ],
                 ),
                 margin: EdgeInsets.only(bottom: 16, top: 24,),
+    // const Center(child: CircularProgressIndicator()),
                 child: Hero(
                   tag: book.title,
-                  child: Image.asset(
-                    book.bookimage,
-                    fit: BoxFit.fitWidth,
-                  ),
+                  child:
+                    // const Center(child: CircularProgressIndicator()),
+
+                        FadeInImage.memoryNetwork(
+                        placeholder: kTransparentImage,
+                        image: book.bookimage,
+                      ),
+                    ),
+
+                  // child: Image.network(
+                  //   book.bookimage,
+                  //   // placeholder: AssetImage("assets/images/ZeroToOne.jpeg"),
+                  //   fit: BoxFit.fitWidth,
+                  // ),
                 ),
               ),
-            ),
+
 
             Text(
               book.title,
@@ -355,7 +367,8 @@ class _BookstoreState extends State<Bookstore> {
               height: 75,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(author.authorimage),
+                  // placeholder:AssetImage(assets/images/ZeroToOne.jpg),
+                  image: NetworkImage(author.authorimage),
                   fit: BoxFit.cover,
                 ),
               ),

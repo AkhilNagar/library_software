@@ -21,7 +21,7 @@ class BookDetail extends StatelessWidget {
           Container(
             child: Hero(
               tag: book.title,
-              child: Image.asset(
+              child: Image.network(
                   book.bookimage,
                   fit: BoxFit.fitWidth
               ),
@@ -272,7 +272,7 @@ class BookDetail extends StatelessWidget {
                   height: 75,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage(book.authorimage),
+                      image: NetworkImage(book.authorimage),
                       fit: BoxFit.cover,
                     ),
                   ),
