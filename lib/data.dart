@@ -56,8 +56,7 @@ Future<List<Book>> getBookList() async {
   List <Book> b=[];
   print(data.length);
   for (int i=0;i<data.length;i++) {
-    print("dat[i]");
-    print(data[i]);
+    print("data $i");
      s = data[i]['bookimage'];
      var obj = Book(
        data[i]['title'],
@@ -94,8 +93,8 @@ Future<List<Author>> getAuthorList() async {
   List <Author> b1=[];
   print(data3.length);
   for (int i=0;i<data3.length;i++) {
-    print("Pleaseee");
-    print(data3[i]);
+    print("dataauthor $i");
+    //print(data3[i]);
     var obj1 = Author(
         data3[i]['author'],
         data3[i]['authorimage'],

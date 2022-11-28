@@ -19,9 +19,11 @@ class _BookstoreState extends State<Bookstore> {
 
   List<NavigationItem> navigationItems = getNavigationItemList();
   late NavigationItem selectedItem;
+
   late List books=[];
   void getBookList1() async {
     print("start");
+
   Future<List> _futureOfList = getBookList();
   books = await _futureOfList ;
   print("func");
@@ -31,19 +33,21 @@ class _BookstoreState extends State<Bookstore> {
 
   late List authors=[];
   void getAuthorList1() async {
-    print("startttttt");
+    print("start getAuthor");
     Future<List> _futureOfList1 = getAuthorList();
     authors = await _futureOfList1 ;
-    print("funccccccc");
-    print(authors);
+    print("gotAuthor");
+
   }
 
   @override
   void initState() {
+
     super.initState();
     setState(() {
       getBookList1();
       getAuthorList1();
+      buildAuthors();
       selectedFilter = filters[0];
       selectedItem = navigationItems[0];
     });
@@ -337,20 +341,29 @@ class _BookstoreState extends State<Bookstore> {
       ),
     );
   }
-
+  int counter=0;
+  var decoded_image=[];
   List<Widget> buildAuthors(){
     List<Widget> list = [];
     print("Entered buildAuthors()");
+
+    for (var i=0;i<authors.length;i++){
+      print("Decode start");
+      decoded_image.add(base64Decode(authors[i].authorimage));
+      print("Decode complete");
+    }
     for (var i = 0; i < authors.length; i++) {
-      list.add(buildAuthor(authors[i], i));
+      list.add(buildAuthor(authors[i], i, decoded_image));
+      counter++;
+      print("COUNTERRRRRRR");
+      print(counter);
+      print(authors[i].author);
     }
     return list;
   }
 
-  Widget buildAuthor(Author author, int index){
-    print("Decode start");
-    var decoded_image = base64Decode(author.authorimage);
-    print("Decode complete");
+  Widget buildAuthor(Author author, int index, var decoded_image){
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.grey[200],
@@ -381,7 +394,7 @@ class _BookstoreState extends State<Bookstore> {
                 image: DecorationImage(
                     fit: BoxFit.cover,
                   // placeholder:AssetImage(assets/images/ZeroToOne.jpg),
-                  image: Image.memory(decoded_image).image
+                  image: Image.memory(decoded_image[0]).image
                   //NetworkImage(author.authorimage),
 
                 ),
