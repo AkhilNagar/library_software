@@ -1,6 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'databasemanager.dart';
-
+import 'package:http/http.dart' as http;
 
 
 
@@ -29,12 +31,24 @@ class Book {
   String author;
   String authorimage;
   String bookimage;
-  int? score;
+  var score;
 
   Book(this.title, this.description, this.author, this.authorimage,this.bookimage, this.score);
 
 }
+String s="";
+class Encoding {
+  Future<String?> networkImageToBase64(String mediaUrlString) async {
+    final response = await http.get(Uri.parse(mediaUrlString));
+    final bytes = response?.bodyBytes;
+    return (bytes != null ? base64Encode(bytes) : null);
+  }
 
+  Future<void> encode(s) async {
+    final imgBase64Str = await
+    networkImageToBase64(s);
+  }
+}
 Future<List<Book>> getBookList() async {
   print("Hiii");
   Future<List<Object?>> data1= DatabaseManager.getData();
@@ -44,6 +58,7 @@ Future<List<Book>> getBookList() async {
   for (int i=0;i<data.length;i++) {
     print("dat[i]");
     print(data[i]);
+     s = data[i]['bookimage'];
      var obj = Book(
        data[i]['title'],
        data[i]['description'],

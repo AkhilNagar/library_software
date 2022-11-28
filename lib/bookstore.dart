@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'data.dart';
@@ -259,6 +261,9 @@ class _BookstoreState extends State<Bookstore> {
   }
 
   Widget buildBook(Book book, int index){
+    print("Decode start");
+    var decoded_image1 = base64Decode(book.bookimage);
+    print("Decode complete");
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -287,33 +292,35 @@ class _BookstoreState extends State<Bookstore> {
                 ),
                 margin: EdgeInsets.only(bottom: 16, top: 24,),
     // const Center(child: CircularProgressIndicator()),
-                child: Hero(
-                  tag: book.title,
-                  child:
-                    // const Center(child: CircularProgressIndicator()),
 
-                        FadeInImage.memoryNetwork(
-                        placeholder: kTransparentImage,
-                        image: book.bookimage,
-                      ),
-                    ),
+                //NetworkImage(author.authorimage),
 
-                  // child: Image.network(
-                  //   book.bookimage,
-                  //   // placeholder: AssetImage("assets/images/ZeroToOne.jpeg"),
-                  //   fit: BoxFit.fitWidth,
+                child: Container(
+                  width: 100,
+                  height: 150,
+                  decoration: BoxDecoration(
+                  image: DecorationImage(
+                  fit:BoxFit.cover,
+                  image: Image.memory(decoded_image1).image
+                  ),
+                  ),
+                ),
+
+
+
+    // placeholder:AssetImage(assets/images/ZeroToOne.jpg),
+
                   // ),
                 ),
               ),
-
-
-            Text(
+              Text(
               book.title,
               style: GoogleFonts.catamaran(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
+
 
             Text(
               book.author,
@@ -325,6 +332,7 @@ class _BookstoreState extends State<Bookstore> {
             ),
 
           ],
+          // ),
         ),
       ),
     );
@@ -332,6 +340,7 @@ class _BookstoreState extends State<Bookstore> {
 
   List<Widget> buildAuthors(){
     List<Widget> list = [];
+    print("Entered buildAuthors()");
     for (var i = 0; i < authors.length; i++) {
       list.add(buildAuthor(authors[i], i));
     }
@@ -339,6 +348,9 @@ class _BookstoreState extends State<Bookstore> {
   }
 
   Widget buildAuthor(Author author, int index){
+    print("Decode start");
+    var decoded_image = base64Decode(author.authorimage);
+    print("Decode complete");
     return Container(
       decoration: BoxDecoration(
         color: Colors.grey[200],
@@ -367,9 +379,11 @@ class _BookstoreState extends State<Bookstore> {
               height: 75,
               decoration: BoxDecoration(
                 image: DecorationImage(
+                    fit: BoxFit.cover,
                   // placeholder:AssetImage(assets/images/ZeroToOne.jpg),
-                  image: NetworkImage(author.authorimage),
-                  fit: BoxFit.cover,
+                  image: Image.memory(decoded_image).image
+                  //NetworkImage(author.authorimage),
+
                 ),
               ),
             ),

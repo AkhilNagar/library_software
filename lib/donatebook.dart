@@ -1,5 +1,9 @@
+import 'dart:async';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'databasemanager.dart';
+import 'data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -7,8 +11,9 @@ String name="",author="";
 int score=0;
 String description="";
 String bookimage="";
+String bookfin="";
 String authorimage="";
-
+String authorfin="";
 class DonateBooks extends StatefulWidget {
   @override
   _DonateState createState() => _DonateState();
@@ -231,9 +236,32 @@ class _DonateState extends State<DonateBooks> {
 class Button extends StatelessWidget {
   //final VoidCallback callback;
   final String text;
+  Future<String?> networkImageToBase64(String mediaUrlString) async {
+    final response = await http.get(Uri.parse(mediaUrlString));
+    final bytes = response?.bodyBytes;
+    return (bytes != null ? base64Encode(bytes) : null);
+  }
+  late final a;
+  late final b;
+  Future<void> encode(String s, String book) async {
+    print("Statrtrtr");
+    a = await
+    networkImageToBase64(s);
+    b = await networkImageToBase64(book);
+    print("aaaa");
+    // print(a);
+    authorfin=a;
+    bookfin = b;
 
+
+  }
+  @override
+  Future<void> enc(String s, String book) async {
+     encode(authorimage, bookimage);
+
+  }
   //required this.callback,
-  const Button({Key? key, required this.text}) : super(key: key);
+  Button({Key? key, required this.text}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -247,12 +275,14 @@ class Button extends StatelessWidget {
           minWidth: 200.0,
           height: 45.0,
 
-          onPressed: () {
+          onPressed: () async {
+            enc(authorimage, bookimage);
+            await Future.delayed(const Duration(seconds: 5));
             DatabaseManager.addItem(title: name,
                   description: description,
                   author: author,
-                  authorimage:authorimage,
-                  bookimage:bookimage,
+                  authorimage: authorfin,
+                  bookimage:bookfin,
                   score: score);
 
             // FirebaseFirestore.instance
