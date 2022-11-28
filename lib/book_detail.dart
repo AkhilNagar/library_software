@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'data.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+// final Book book=[{"title":""}];
+
 class BookDetail extends StatelessWidget {
 
   final Book book;
@@ -180,14 +182,27 @@ class BookDetail extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
-                                  "Checkout",
-                                  style: GoogleFonts.catamaran(
-                                    fontSize: 18,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
+                                TextButton(
+                                  style: ButtonStyle (
+
                                   ),
-                                ),
+                                  child: Text("Checkout"),
+                                  onPressed:() {
+                                      FOOD_DATA.add(
+                                        {
+                                          "Name":book.title,
+                                          "Author":book.author,
+                                          "Rating":book.score.toString(),
+                                          "image": book.bookimage
+                                        }
+                                      );
+                                  },
+                                  // text: "Checkout",
+                                  // onPressed: (){
+                                  // s
+                                  ),
+
+                                // ),
                                 SizedBox(
                                   width: 8,
                                 ),
@@ -195,10 +210,13 @@ class BookDetail extends StatelessWidget {
                                   Icons.keyboard_arrow_down,
                                   color: Colors.white,
                                 ),
+                              // ),
                               ],
                             ),
                           ),
                         ),
+                        // ),
+
 
                         Container(
                           width: size.width / 2 - 44,
@@ -254,35 +272,11 @@ class BookDetail extends StatelessWidget {
             ),
           ),
 
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Padding(
-              padding: EdgeInsets.only(left: 32, bottom: (size.height * 0.5) - (75 / 2)),
-              child: Card(
-                elevation: 4,
-                margin: EdgeInsets.all(0),
-                clipBehavior: Clip.antiAlias,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(15),
-                  ),
-                ),
-                child: Container(
-                  width: 75,
-                  height: 75,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(book.authorimage),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
+
 
         ],
       ),
     );
   }
 }
+

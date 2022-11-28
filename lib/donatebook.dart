@@ -3,9 +3,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'databasemanager.dart';
-import 'data.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_core/firebase_core.dart';
+// import 'package:dio/dio.dart';
+// import 'package:path_provider/path_provider.dart';
 
 String name="",author="";
 int score=0;
@@ -45,7 +46,7 @@ class _DonateState extends State<DonateBooks> {
 
 
     return Scaffold(
-        appBar: AppBar(title: Text("Donate Book!"),backgroundColor: Color(0xff885566),),
+        appBar: AppBar(title: Text("Donate Book!"),backgroundColor: Color(0xff967259),),
         body: Stack(
           children:<Widget>[
             Form(
@@ -79,46 +80,6 @@ class _DonateState extends State<DonateBooks> {
                     ),
                   ),
 
-                  // Padding(padding: const EdgeInsets.only(top: 10)),
-                  // Padding(
-                  //   padding: const EdgeInsets.all(8.0),
-                  //   child: TextField(
-                  //     keyboardType: TextInputType.emailAddress,
-                  //     onChanged: (value) => mname = value,
-                  //     decoration: InputDecoration(
-                  //       labelText: "Enter Your Mother's Name...",
-                  //       icon: Icon(Icons.person),
-                  //     ),
-                  //   ),
-                  // ),
-
-
-                  // Row(children: <Widget>[
-                  //   Expanded(
-                  //     child: ListTile(
-                  //       title: Text(
-                  //         "Male",
-                  //         textAlign: TextAlign.start,
-                  //       ),
-                  //       trailing: Radio(
-                  //           value: "male",
-                  //           groupValue: groupValue,
-                  //           onChanged: (e) => valueChanged(e)),
-                  //     ),
-                  //   ),
-                  //   Expanded(
-                  //     child: ListTile(
-                  //       title: Text(
-                  //         "Female",
-                  //         textAlign: TextAlign.start,
-                  //       ),
-                  //       trailing: Radio(
-                  //           value: "female",
-                  //           groupValue: groupValue,
-                  //           onChanged: (e) => valueChanged(e)),
-                  //     ),
-                  //   ),
-                  // ]),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
@@ -168,59 +129,6 @@ class _DonateState extends State<DonateBooks> {
                     ),
                   ),
 
-
-
-
-                  // Padding(
-                  //   padding: const EdgeInsets.all(8.0),
-                  //   child: TextFormField(
-                  //     autocorrect: false,
-                  //     obscureText: _obscureText,
-                  //     onChanged: (value) => password = value,
-                  //     decoration: InputDecoration(
-                  //       labelText: "Create Password...",
-                  //       icon: Icon(Icons.lock),
-                  //       suffixIcon: IconButton(
-                  //         icon: Icon(
-                  //           // Based on passwordVisible state choose the icon
-                  //           _obscureText ? Icons.visibility : Icons.visibility_off,
-                  //           color: Theme.of(context).primaryColorLight,
-                  //         ),
-                  //         onPressed: () {
-                  //           // Update the state i.e. toogle the state of passwordVisible variable
-                  //           setState(() {
-                  //             _obscureText = !_obscureText;
-                  //           });
-                  //         },
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-                  // Padding(
-                  //   padding: const EdgeInsets.all(8.0),
-                  //   child: TextFormField(
-                  //     autocorrect: false,
-                  //     obscureText: _obscureText,
-                  //     onChanged: (value) => password = value,
-                  //     decoration: InputDecoration(
-                  //       labelText: "Confirm Password...",
-                  //       icon: Icon(Icons.lock),
-                  //       suffixIcon: IconButton(
-                  //         icon: Icon(
-                  //           // Based on passwordVisible state choose the icon
-                  //           _obscureText ? Icons.visibility : Icons.visibility_off,
-                  //           color: Theme.of(context).primaryColorLight,
-                  //         ),
-                  //         onPressed: () {
-                  //           // Update the state i.e. toogle the state of passwordVisible variable
-                  //           setState(() {
-                  //             _obscureText = !_obscureText;
-                  //           });
-                  //         },
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                   Button(
                     text: 'Donate',
                     //callback: null,
@@ -252,14 +160,15 @@ class Button extends StatelessWidget {
     // print(a);
     authorfin=a;
     bookfin = b;
-
-
   }
+
+
   @override
   Future<void> enc(String s, String book) async {
      encode(authorimage, bookimage);
 
   }
+
   //required this.callback,
   Button({Key? key, required this.text}) : super(key: key);
   @override
