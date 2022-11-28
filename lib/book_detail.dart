@@ -21,8 +21,8 @@ class BookDetail extends StatelessWidget {
           Container(
             child: Hero(
               tag: book.title,
-              child: Image.asset(
-                  book.image,
+              child: Image.network(
+                  book.bookimage,
                   fit: BoxFit.fitWidth
               ),
             ),
@@ -86,7 +86,7 @@ class BookDetail extends StatelessWidget {
                           ),
 
                           Text(
-                            book.author.fullname,
+                            book.author,
                             style: GoogleFonts.catamaran(
                               fontSize: 18,
                               color: Colors.grey,
@@ -116,7 +116,7 @@ class BookDetail extends StatelessWidget {
                                 ),
 
                                 Text(
-                                  book.score,
+                                  book.score.toString(),
                                   style: GoogleFonts.catamaran(
                                     fontSize: 16,
                                     color: Colors.grey,
@@ -181,7 +181,7 @@ class BookDetail extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "Want to read",
+                                  "Checkout",
                                   style: GoogleFonts.catamaran(
                                     fontSize: 18,
                                     color: Colors.white,
@@ -272,7 +272,7 @@ class BookDetail extends StatelessWidget {
                   height: 75,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage(book.author.image),
+                      image: NetworkImage(book.authorimage),
                       fit: BoxFit.cover,
                     ),
                   ),

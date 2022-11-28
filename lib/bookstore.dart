@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'data.dart';
 import 'constants.dart';
 import 'book_detail.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class Bookstore extends StatefulWidget {
   @override
@@ -16,14 +17,31 @@ class _BookstoreState extends State<Bookstore> {
 
   List<NavigationItem> navigationItems = getNavigationItemList();
   late NavigationItem selectedItem;
+  late List books=[];
+  void getBookList1() async {
+    print("start");
+  Future<List> _futureOfList = getBookList();
+  books = await _futureOfList ;
+  print("func");
+  print(books);
+  }
 
-  List<Book> books = getBookList();
-  List<Author> authors = getAuthorList();
+
+  late List authors=[];
+  void getAuthorList1() async {
+    print("startttttt");
+    Future<List> _futureOfList1 = getAuthorList();
+    authors = await _futureOfList1 ;
+    print("funccccccc");
+    print(authors);
+  }
 
   @override
   void initState() {
     super.initState();
     setState(() {
+      getBookList1();
+      getAuthorList1();
       selectedFilter = filters[0];
       selectedItem = navigationItems[0];
     });
@@ -268,15 +286,26 @@ class _BookstoreState extends State<Bookstore> {
                   ],
                 ),
                 margin: EdgeInsets.only(bottom: 16, top: 24,),
+    // const Center(child: CircularProgressIndicator()),
                 child: Hero(
                   tag: book.title,
-                  child: Image.asset(
-                    book.image,
-                    fit: BoxFit.fitWidth,
-                  ),
+                  child:
+                    // const Center(child: CircularProgressIndicator()),
+
+                        FadeInImage.memoryNetwork(
+                        placeholder: kTransparentImage,
+                        image: book.bookimage,
+                      ),
+                    ),
+
+                  // child: Image.network(
+                  //   book.bookimage,
+                  //   // placeholder: AssetImage("assets/images/ZeroToOne.jpeg"),
+                  //   fit: BoxFit.fitWidth,
+                  // ),
                 ),
               ),
-            ),
+
 
             Text(
               book.title,
@@ -287,7 +316,7 @@ class _BookstoreState extends State<Bookstore> {
             ),
 
             Text(
-              book.author.fullname,
+              book.author,
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.grey,
@@ -338,7 +367,8 @@ class _BookstoreState extends State<Bookstore> {
               height: 75,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(author.image),
+                  // placeholder:AssetImage(assets/images/ZeroToOne.jpg),
+                  image: NetworkImage(author.authorimage),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -355,7 +385,7 @@ class _BookstoreState extends State<Bookstore> {
             children: [
 
               Text(
-                author.fullname,
+                author.author,
                 style: GoogleFonts.catamaran(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -375,14 +405,8 @@ class _BookstoreState extends State<Bookstore> {
                     width: 8,
                   ),
 
-                  Text(
-                    author.books.toString() + " books",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+
+
 
                 ],
               ),
