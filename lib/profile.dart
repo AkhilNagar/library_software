@@ -30,7 +30,7 @@ class MyProfile extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(title: Text('Profile'), backgroundColor: Color(0xff885566),elevation:0),
+      appBar: AppBar(title: Text('Profile'), backgroundColor: Color(0xff967259),elevation:0),
       body: SafeArea(
         child:SingleChildScrollView(
 
@@ -39,7 +39,7 @@ class MyProfile extends StatelessWidget{
             children: <Widget>[
               CircleAvatar(
                 radius: 50,
-                backgroundImage: AssetImage("images/user.jpg"),
+                backgroundImage: AssetImage("assets/images/user.jpg"),
               ),
               Text(
                 'USER 19',
@@ -54,7 +54,7 @@ class MyProfile extends StatelessWidget{
                 'Tech Enthusiasts',
                 style: TextStyle(
                     fontSize: 30.0,
-                    color: Colors.blueGrey[200],
+                    color: Color(0xFFA1887F),
                     letterSpacing: 2.5,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Source Sans Pro'),
@@ -153,12 +153,12 @@ class InfoCard extends StatelessWidget {
         child: ListTile(
           leading: Icon(
             icon,
-            color: Colors.teal,
+            color: Colors.black,
           ),
           title: Text(
             text,
             style: TextStyle(
-              color: Colors.teal,
+              color: Colors.black,
               fontSize: 20.0,
               fontFamily: 'Source Sans Pro',
             ),
