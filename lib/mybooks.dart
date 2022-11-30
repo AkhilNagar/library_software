@@ -88,6 +88,7 @@ class _BookState extends State<MyBooks> {
     final double categoryHeight = size.height*0.30;
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(title: Text("My Books"),backgroundColor: Color(0xff967259),),
         backgroundColor: Colors.white,
         // appBar: AppBar(
         //   elevation: 0,
@@ -107,7 +108,10 @@ class _BookState extends State<MyBooks> {
         //     )
         //   ],
         // ),
-        body: Container(
+        body: new Container(
+          // decoration: new BoxDecoration(
+          //   image: new DecorationImage(image: new AssetImage("images/background.jpg"), fit: BoxFit.cover,),
+          // ),
           padding: EdgeInsets.only(top: 16, left: 16, right: 16),
           //height: size.height,
           child: Column(
@@ -119,15 +123,15 @@ class _BookState extends State<MyBooks> {
                   //   "Loyality Cards",
                   //   style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 20),
                   // ),
-                  Text(
-                    "My books",
-                    style: GoogleFonts.catamaran(
-                      fontWeight: FontWeight.w900,
-                      fontSize: 40,
-                      height: 1,
-                    ),
-
-                  ),
+                  // Text(
+                  //   "My books",
+                  //   style: GoogleFonts.catamaran(
+                  //     fontWeight: FontWeight.w900,
+                  //     fontSize: 40,
+                  //     height: 1,
+                  //   ),
+                  //
+                  // ),
                 ],
               ),
               const SizedBox(

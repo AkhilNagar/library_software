@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'databasemanager.dart';
+import 'main.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_core/firebase_core.dart';
 
@@ -144,17 +145,22 @@ class Button extends StatelessWidget {
   //final VoidCallback callback;
   final String text;
   Future<String?> networkImageToBase64(String mediaUrlString) async {
-    //var image = await ImageDownloader.downloadImage(mediaUrlString);
-    final http.Response responseData = await http.get(Uri.parse(mediaUrlString));
-    var uint8list = responseData.bodyBytes;
-    // File file = await toFile(uriString);
-    // final bytes = file.readAsBytesSync();
-    // var response = await http.get(Uri.parse(mediaUrlString));
-    // final bytes = response?.bodyBytes;
-    return (uint8list != null ? base64Encode(uint8list) : null);
-    // var path = await ImageDownloader.findPath(image);
-    // return base64Encode(path);
+    final response = await http.get(Uri.parse(mediaUrlString));
+    final bytes = response?.bodyBytes;
+    return (bytes != null ? base64Encode(bytes) : null);
   }
+  // Future<String?> networkImageToBase64(String mediaUrlString) async {
+  //   //var image = await ImageDownloader.downloadImage(mediaUrlString);
+  //   final http.Response responseData = await http.get(Uri.parse(mediaUrlString));
+  //   var uint8list = responseData.bodyBytes;
+  //   // File file = await toFile(uriString);
+  //   // final bytes = file.readAsBytesSync();
+  //   // var response = await http.get(Uri.parse(mediaUrlString));
+  //   // final bytes = response?.bodyBytes;
+  //   return (uint8list != null ? base64Encode(uint8list) : null);
+  //   // var path = await ImageDownloader.findPath(image);
+  //   // return base64Encode(path);
+  // }
 
   Future<void> encode(String s, String book) async {
     var a;
@@ -162,9 +168,8 @@ class Button extends StatelessWidget {
     print("Start Encode");
     a = await
     networkImageToBase64(s);
-    //b = await networkImageToBase64(book);
-    b="a";
-    print("aaa");
+    b = await networkImageToBase64(book);
+    // print("aaa");
     print(a);
     print("Encode Complete");
     // print(a);
@@ -204,6 +209,11 @@ class Button extends StatelessWidget {
                   bookimage:bookfin,
                   score: score);
 
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MyHomePage(title: 'OpenLibrary',)),
+            );
+
             // FirebaseFirestore.instance
             //     .collection('donatedBooks')
             //     .add({"title": "title",
@@ -212,6 +222,7 @@ class Button extends StatelessWidget {
             //   "image":"image",
             //   "score":5});
           },    //ADD BUTTON FUNCTION HERE
+
 
           child: Text(text, style: TextStyle(color: Colors.white)),
         ),

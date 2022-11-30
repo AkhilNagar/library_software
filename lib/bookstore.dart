@@ -56,16 +56,24 @@ class _BookstoreState extends State<Bookstore> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Container(
+      constraints: const BoxConstraints.expand(),
+      decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/images/background.jpg"),
+              fit: BoxFit.cover)),
+    child: Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        title: Text("Discover Books"),
+        backgroundColor: Color(0xff967259),
+        // backgroundColor: Colors.white,
         elevation: 0,
         brightness: Brightness.light,
-        leading: Icon(
-          Icons.sort,
-          color: kPrimaryColor,
-          size: 28,
-        ),
+        // leading: Icon(
+        //   Icons.sort,
+        //   color: kPrimaryColor,
+        //   size: 28,
+        // ),
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 16,),
@@ -101,14 +109,14 @@ class _BookstoreState extends State<Bookstore> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
 
-                Text(
-                  "Discover books",
-                  style: GoogleFonts.catamaran(
-                    fontWeight: FontWeight.w900,
-                    fontSize: 40,
-                    height: 1,
-                  ),
-                ),
+                // Text(
+                //   "Discover books",
+                //   style: GoogleFonts.catamaran(
+                //     fontWeight: FontWeight.w900,
+                //     fontSize: 40,
+                //     height: 1,
+                //   ),
+                // ),
 
                 SizedBox(
                   height: 16,
@@ -207,6 +215,7 @@ class _BookstoreState extends State<Bookstore> {
         ],
       ),
 
+    ),
     );
   }
 
@@ -306,7 +315,7 @@ class _BookstoreState extends State<Bookstore> {
                 //NetworkImage(author.authorimage),
 
                 child: Container(
-                  width: 100,
+                  width: 180,
                   height: 150,
                   decoration: BoxDecoration(
                   image: DecorationImage(
