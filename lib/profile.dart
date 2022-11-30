@@ -42,7 +42,7 @@ class MyProfile extends StatelessWidget{
                 backgroundImage: AssetImage("assets/images/user.jpg"),
               ),
               Text(
-                'USER 19',
+                'H A',
                 style: TextStyle(
                   fontSize: 40.0,
                   color: Colors.black,

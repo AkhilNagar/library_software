@@ -1,18 +1,25 @@
+import 'dart:convert';
+
 import 'constants.dart';
 import 'package:flutter/material.dart';
 import 'data.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'mybooks.dart';
+import 'main.dart';
 
 // final Book book=[{"title":""}];
 
 class BookDetail extends StatelessWidget {
 
   final Book book;
+  var decoded_image;
 
   BookDetail({required this.book});
-
   @override
   Widget build(BuildContext context) {
+    print("Decode start");
+    decoded_image= base64Decode(book.bookimage);
+    print("Decode complete");
 
     Size size = MediaQuery.of(context).size;
 
@@ -21,11 +28,14 @@ class BookDetail extends StatelessWidget {
         children: [
 
           Container(
-            child: Hero(
-              tag: book.title,
-              child: Image.network(
-                  book.bookimage,
-                  fit: BoxFit.fitWidth
+            child: Container(
+              width: 500,
+              height: 360,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    fit:BoxFit.cover,
+                    image: Image.memory(decoded_image).image
+                ),
               ),
             ),
           ),
@@ -188,6 +198,7 @@ class BookDetail extends StatelessWidget {
                                   ),
                                   child: Text("Checkout"),
                                   onPressed:() {
+
                                       FOOD_DATA.add(
                                         {
                                           "Name":book.title,
@@ -196,6 +207,12 @@ class BookDetail extends StatelessWidget {
                                           "image": book.bookimage
                                         }
                                       );
+
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => MyHomePage(title: 'OpenLibrary',)),
+                                      );
+
                                   },
                                   // text: "Checkout",
                                   // onPressed: (){

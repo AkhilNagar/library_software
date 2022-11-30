@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import 'databasemanager.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_core/firebase_core.dart';
-// import 'package:dio/dio.dart';
-// import 'package:path_provider/path_provider.dart';
+
 
 String name="",author="";
 int score=0;
@@ -83,7 +82,7 @@ class _DonateState extends State<DonateBooks> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
-                      maxLines: 10,
+                      maxLines: 5,
                       keyboardType: TextInputType.text,
                       onChanged: (value) => description = value,
                       decoration: InputDecoration(
@@ -145,18 +144,29 @@ class Button extends StatelessWidget {
   //final VoidCallback callback;
   final String text;
   Future<String?> networkImageToBase64(String mediaUrlString) async {
-    final response = await http.get(Uri.parse(mediaUrlString));
-    final bytes = response?.bodyBytes;
-    return (bytes != null ? base64Encode(bytes) : null);
+    //var image = await ImageDownloader.downloadImage(mediaUrlString);
+    final http.Response responseData = await http.get(Uri.parse(mediaUrlString));
+    var uint8list = responseData.bodyBytes;
+    // File file = await toFile(uriString);
+    // final bytes = file.readAsBytesSync();
+    // var response = await http.get(Uri.parse(mediaUrlString));
+    // final bytes = response?.bodyBytes;
+    return (uint8list != null ? base64Encode(uint8list) : null);
+    // var path = await ImageDownloader.findPath(image);
+    // return base64Encode(path);
   }
-  late final a;
-  late final b;
+
   Future<void> encode(String s, String book) async {
-    print("Statrtrtr");
+    var a;
+    var b;
+    print("Start Encode");
     a = await
     networkImageToBase64(s);
-    b = await networkImageToBase64(book);
-    print("aaaa");
+    //b = await networkImageToBase64(book);
+    b="a";
+    print("aaa");
+    print(a);
+    print("Encode Complete");
     // print(a);
     authorfin=a;
     bookfin = b;

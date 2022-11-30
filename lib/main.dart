@@ -130,12 +130,12 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             icon: pageIndex == 1
                 ? const Icon(
-              Icons.work_rounded,
+              Icons.bookmark_added_rounded,
               color: Colors.white,
               size: 35,
             )
                 : const Icon(
-              Icons.work_outline_outlined,
+              Icons.bookmark_added_outlined,
               color: Colors.white,
               size: 35,
             ),
@@ -149,12 +149,12 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             icon: pageIndex == 2
                 ? const Icon(
-              Icons.widgets_rounded,
+              Icons.book_sharp,
               color: Colors.white,
               size: 35,
             )
                 : const Icon(
-              Icons.widgets_outlined,
+              Icons.book_outlined,
               color: Colors.white,
               size: 35,
             ),
@@ -183,23 +183,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-class Page4 extends StatelessWidget {
-  const Page4({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: const Color(0xffC4DFCB),
-      child: Center(
-        child: Text(
-          "Page Number 4",
-          style: TextStyle(
-            color: Colors.green[900],
-            fontSize: 45,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ),
-    );
-  }
-}

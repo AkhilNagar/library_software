@@ -48,6 +48,7 @@ class _BookstoreState extends State<Bookstore> {
       getBookList1();
       getAuthorList1();
       buildAuthors();
+      buildBooks();
       selectedFilter = filters[0];
       selectedItem = navigationItems[0];
     });
@@ -255,9 +256,14 @@ class _BookstoreState extends State<Bookstore> {
       ),
     );
   }
-
+  var decoded_image2=[];
   List<Widget> buildBooks(){
     List<Widget> list = [];
+    // for (var i=0;i<books.length;i++){
+    //   print("Decode start");
+    //   decoded_image2.add(base64Decode(books[i].authorimage));
+    //   print("Decode complete");
+    // }
     for (var i = 0; i < books.length; i++) {
       list.add(buildBook(books[i], i));
     }
@@ -341,29 +347,28 @@ class _BookstoreState extends State<Bookstore> {
       ),
     );
   }
-  int counter=0;
-  var decoded_image=[];
+
+  // var decoded_image=[];
   List<Widget> buildAuthors(){
     List<Widget> list = [];
     print("Entered buildAuthors()");
 
-    for (var i=0;i<authors.length;i++){
-      print("Decode start");
-      decoded_image.add(base64Decode(authors[i].authorimage));
-      print("Decode complete");
-    }
+    // for (var i=0;i<authors.length;i++){
+    //   print("Decode start");
+    //   decoded_image.add(base64Decode(authors[i].authorimage));
+    //   print("Decode complete");
+    // }
     for (var i = 0; i < authors.length; i++) {
-      list.add(buildAuthor(authors[i], i, decoded_image));
-      counter++;
-      print("COUNTERRRRRRR");
-      print(counter);
-      print(authors[i].author);
+      list.add(buildAuthor(authors[i], i));
+
     }
     return list;
   }
 
-  Widget buildAuthor(Author author, int index, var decoded_image){
-
+  Widget buildAuthor(Author author, int index){
+    print("Decode start");
+    var decoded_image = base64Decode(author.authorimage);
+    print("Decode complete");
     return Container(
       decoration: BoxDecoration(
         color: Colors.grey[200],
@@ -394,7 +399,7 @@ class _BookstoreState extends State<Bookstore> {
                 image: DecorationImage(
                     fit: BoxFit.cover,
                   // placeholder:AssetImage(assets/images/ZeroToOne.jpg),
-                  image: Image.memory(decoded_image[0]).image
+                  image: Image.memory(decoded_image).image
                   //NetworkImage(author.authorimage),
 
                 ),

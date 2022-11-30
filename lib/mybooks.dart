@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'CustomTextStyle.dart';
 import 'CustomUtils.dart';
 import 'constants.dart';
@@ -53,10 +54,10 @@ class _BookState extends State<MyBooks> {
                     )
                   ],
                 ),
-                Image.asset(
-                  "assets/images/${post["image"]}",
-                  height: double.infinity,
-                )
+                // Image.asset(
+                //   "assets/images/${post["image"]}",
+                //   height: double.infinity,
+                // )
               ],
             ),
           )));
@@ -107,21 +108,27 @@ class _BookState extends State<MyBooks> {
         //   ],
         // ),
         body: Container(
+          padding: EdgeInsets.only(top: 16, left: 16, right: 16),
           //height: size.height,
           child: Column(
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                // children: <Widget>[
-                //   Text(
-                //     "Loyality Cards",
-                //     style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 20),
-                //   ),
-                //   Text(
-                //     "Menu",
-                //     style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
-                //   ),
-                // ],
+                children: <Widget>[
+                  // Text(
+                  //   "Loyality Cards",
+                  //   style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 20),
+                  // ),
+                  Text(
+                    "My books",
+                    style: GoogleFonts.catamaran(
+                      fontWeight: FontWeight.w900,
+                      fontSize: 40,
+                      height: 1,
+                    ),
+
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 0,
@@ -181,94 +188,94 @@ class CategoriesScroller extends StatelessWidget {
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       scrollDirection: Axis.horizontal,
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-        child: FittedBox(
-          fit: BoxFit.fill,
-          alignment: Alignment.topCenter,
-          child: Row(
-            children: <Widget>[
-              // Container(
-              //   width: 150,
-              //   margin: EdgeInsets.only(right: 20),
-              //   height: categoryHeight,
-              //   decoration: BoxDecoration(color: Colors.orange.shade400, borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              //   child: Padding(
-              //     padding: const EdgeInsets.all(12.0),
-              //     child: Column(
-              //       crossAxisAlignment: CrossAxisAlignment.start,
-              //       children: <Widget>[
-              //         Text(
-              //           "Most\nFavorites",
-              //           style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
-              //         ),
-              //         SizedBox(
-              //           height: 10,
-              //         ),
-              //         Text(
-              //           "20 Items",
-              //           style: TextStyle(fontSize: 16, color: Colors.white),
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // ),
-              // Container(
-              //   width: 150,
-              //   margin: EdgeInsets.only(right: 20),
-              //   height: categoryHeight,
-              //   decoration: BoxDecoration(color: Colors.blue.shade400, borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              //   child: Container(
-              //     child: Padding(
-              //       padding: const EdgeInsets.all(12.0),
-              //       child: Column(
-              //         crossAxisAlignment: CrossAxisAlignment.start,
-              //         children: <Widget>[
-              //           Text(
-              //             "Newest",
-              //             style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
-              //           ),
-              //           SizedBox(
-              //             height: 10,
-              //           ),
-              //           Text(
-              //             "20 Items",
-              //             style: TextStyle(fontSize: 16, color: Colors.white),
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // Container(
-              //   width: 150,
-              //   margin: EdgeInsets.only(right: 20),
-              //   height: categoryHeight,
-              //   decoration: BoxDecoration(color: Colors.lightBlueAccent.shade400, borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              //   child: Padding(
-              //     padding: const EdgeInsets.all(12.0),
-              //     child: Column(
-              //       crossAxisAlignment: CrossAxisAlignment.start,
-              //       children: <Widget>[
-              //         Text(
-              //           "Super\nSaving",
-              //           style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
-              //         ),
-              //         SizedBox(
-              //           height: 10,
-              //         ),
-              //         Text(
-              //           "20 Items",
-              //           style: TextStyle(fontSize: 16, color: Colors.white),
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // ),
-            ],
-          ),
-        ),
-      ),
+      // child: Container(
+      //   margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+      //   child: FittedBox(
+      //     fit: BoxFit.fill,
+      //     alignment: Alignment.topCenter,
+      //     child: Row(
+      //       children: <Widget>[
+      //         // Container(
+      //         //   width: 150,
+      //         //   margin: EdgeInsets.only(right: 20),
+      //         //   height: categoryHeight,
+      //         //   decoration: BoxDecoration(color: Colors.orange.shade400, borderRadius: BorderRadius.all(Radius.circular(20.0))),
+      //         //   child: Padding(
+      //         //     padding: const EdgeInsets.all(12.0),
+      //         //     child: Column(
+      //         //       crossAxisAlignment: CrossAxisAlignment.start,
+      //         //       children: <Widget>[
+      //         //         Text(
+      //         //           "Most\nFavorites",
+      //         //           style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+      //         //         ),
+      //         //         SizedBox(
+      //         //           height: 10,
+      //         //         ),
+      //         //         Text(
+      //         //           "20 Items",
+      //         //           style: TextStyle(fontSize: 16, color: Colors.white),
+      //         //         ),
+      //         //       ],
+      //         //     ),
+      //         //   ),
+      //         // ),
+      //         // Container(
+      //         //   width: 150,
+      //         //   margin: EdgeInsets.only(right: 20),
+      //         //   height: categoryHeight,
+      //         //   decoration: BoxDecoration(color: Colors.blue.shade400, borderRadius: BorderRadius.all(Radius.circular(20.0))),
+      //         //   child: Container(
+      //         //     child: Padding(
+      //         //       padding: const EdgeInsets.all(12.0),
+      //         //       child: Column(
+      //         //         crossAxisAlignment: CrossAxisAlignment.start,
+      //         //         children: <Widget>[
+      //         //           Text(
+      //         //             "Newest",
+      //         //             style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+      //         //           ),
+      //         //           SizedBox(
+      //         //             height: 10,
+      //         //           ),
+      //         //           Text(
+      //         //             "20 Items",
+      //         //             style: TextStyle(fontSize: 16, color: Colors.white),
+      //         //           ),
+      //         //         ],
+      //         //       ),
+      //         //     ),
+      //         //   ),
+      //         // ),
+      //         // Container(
+      //         //   width: 150,
+      //         //   margin: EdgeInsets.only(right: 20),
+      //         //   height: categoryHeight,
+      //         //   decoration: BoxDecoration(color: Colors.lightBlueAccent.shade400, borderRadius: BorderRadius.all(Radius.circular(20.0))),
+      //         //   child: Padding(
+      //         //     padding: const EdgeInsets.all(12.0),
+      //         //     child: Column(
+      //         //       crossAxisAlignment: CrossAxisAlignment.start,
+      //         //       children: <Widget>[
+      //         //         Text(
+      //         //           "Super\nSaving",
+      //         //           style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+      //         //         ),
+      //         //         SizedBox(
+      //         //           height: 10,
+      //         //         ),
+      //         //         Text(
+      //         //           "20 Items",
+      //         //           style: TextStyle(fontSize: 16, color: Colors.white),
+      //         //         ),
+      //         //       ],
+      //         //     ),
+      //         //   ),
+      //         // ),
+      //       ],
+      //     ),
+      //   ),
+      // ),
     );
   }
 }
